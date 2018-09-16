@@ -1,29 +1,50 @@
+#class Doctor
+#  attr_accessor :name, :patient, :date
+#  @@all = []
+
+#  def initialize(name)
+#    @name = name
+#    @@all << self
+#  end
+#
+#  def self.all
+#    @@all
+#  end
+#
+#  def new_appointment(patient, date)
+#    appointment = Appointment.new(patient, self, date)
+#  end
+#
+#  def appointments
+#    Appointment.all.select do |appointment|
+#      appointment.doctor == self
+#    end
+#  end
+#
+#  def patients
+#    Appointments.all.map do |appointment|
+#      appointment.patient
+#    end
+#  end
+#end
+
 class Doctor
-  attr_accessor :name, :patient, :date
-  @@all = []
+  attr_accessor :name
 
   def initialize(name)
     @name = name
-    @@all << self
+    @appointments = []
   end
 
-  def self.all
-    @@all
-  end
-
-  def new_appointment(patient, date)
-    appointment = Appointment.new(patient, self, date)
+  def add_appointment(appointment)
+    @appointments << appointment
   end
 
   def appointments
-    Appointment.all.select do |appointment|
-      appointment.doctor == self
-    end
+    @appointments
   end
 
   def patients
-    Appointments.all.map do |appointment|
-      appointment.patient
-    end
+    self.appointments.collect {|appointment| appointment.patient}
   end
 end
